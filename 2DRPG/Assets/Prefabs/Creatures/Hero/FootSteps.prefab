@@ -97,14 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameRate: 10
-  _loop: 0
-  _sprites:
-  - {fileID: 21300000, guid: e8900a8ed5c1cca468184341dc43beda, type: 3}
-  - {fileID: 21300000, guid: e974a80fd7ae9ac4a9713c8bdc344df8, type: 3}
-  - {fileID: 21300000, guid: e30bdd3188ba5a6429032d87f05ff397, type: 3}
-  - {fileID: 21300000, guid: 8a5d795416123e24189516c2c33f4df7, type: 3}
-  - {fileID: 21300000, guid: 9be449034eeaedd4ba1ba370b8ff954f, type: 3}
-  - {fileID: 21300000, guid: 9be449034eeaedd4ba1ba370b8ff954f, type: 3}
   _onComplete:
     m_PersistentCalls:
       m_Calls:
@@ -120,6 +112,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _clips:
+  - _name: run
+    _sprites:
+    - {fileID: 21300000, guid: e8900a8ed5c1cca468184341dc43beda, type: 3}
+    - {fileID: 21300000, guid: e974a80fd7ae9ac4a9713c8bdc344df8, type: 3}
+    - {fileID: 21300000, guid: e30bdd3188ba5a6429032d87f05ff397, type: 3}
+    - {fileID: 21300000, guid: 8a5d795416123e24189516c2c33f4df7, type: 3}
+    - {fileID: 21300000, guid: 9be449034eeaedd4ba1ba370b8ff954f, type: 3}
+    _loop: 0
+    _allowNextClip: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8833006134628017799
 MonoBehaviour:
   m_ObjectHideFlags: 0

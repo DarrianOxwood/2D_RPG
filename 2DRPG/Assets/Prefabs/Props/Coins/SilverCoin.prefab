@@ -103,19 +103,7 @@ MonoBehaviour:
   _action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1928791604337777192}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7146981458278157667, guid: f6f093c3f5a1d9c48b8eda46d7035292, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Scripts.Hero, Assembly-CSharp
         m_MethodName: AddCoins
         m_Mode: 3
@@ -125,7 +113,19 @@ MonoBehaviour:
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1928791604222857335}
+        m_TargetAssemblyTypeName: Scripts.SpriteAnimation, Assembly-CSharp
+        m_MethodName: SetClip
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: destroy
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1928791604222857321
 MonoBehaviour:
@@ -169,15 +169,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameRate: 10
-  _loop: 1
-  _sprites:
-  - {fileID: -2322180950842035098, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
-  - {fileID: -4893972260818282012, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
-  - {fileID: -6323751108524238166, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
-  - {fileID: 2722280177590742205, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
   _onComplete:
     m_PersistentCalls:
       m_Calls: []
+  _clips:
+  - _name: idle
+    _sprites:
+    - {fileID: -2322180950842035098, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
+    - {fileID: -4893972260818282012, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
+    - {fileID: -6323751108524238166, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
+    - {fileID: 2722280177590742205, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
+    _loop: 1
+    _allowNextClip: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - _name: destroy
+    _sprites:
+    - {fileID: -4986890610287934012, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
+    - {fileID: 6143208460787649835, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
+    - {fileID: 7609282858266732271, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
+    _loop: 0
+    _allowNextClip: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1928791604222857321}
+          m_TargetAssemblyTypeName: Scripts.Components.DestroyObjectComponent, Assembly-CSharp
+          m_MethodName: DestroyObject
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1928791604337777192
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,11 +302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frameRate: 10
-  _loop: 0
-  _sprites:
-  - {fileID: -4986890610287934012, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
-  - {fileID: 6143208460787649835, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
-  - {fileID: 7609282858266732271, guid: d06ba93d1e3b4554a83b4cc5055062ab, type: 3}
   _onComplete:
     m_PersistentCalls:
       m_Calls:
@@ -294,3 +317,4 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _clips: []
