@@ -1,4 +1,5 @@
 using Scripts.Components;
+using Scripts.Utils;
 using UnityEngine;
 
 namespace Scripts
@@ -9,6 +10,8 @@ namespace Scripts
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpSpeed;
         [SerializeField] private float _damageJumpSpeed;
+        [SerializeField] private float _slamDownVelocity;
+        [SerializeField] private int _damage;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private float _interactionRadius;
         [SerializeField] private LayerMask _interactionLayer;
@@ -16,7 +19,16 @@ namespace Scripts
 
         [SerializeField] private LayerCheck _groundCheck;
 
+        [SerializeField] private RuntimeAnimatorController _armed;
+        [SerializeField] private RuntimeAnimatorController _disarmed;
+
+
+        [SerializeField] private CheckCircleOverlap _attackRange;
+
+        [Space] [Header("Particles")]
         [SerializeField] private SpawnComponent _footStepParticles;
+        [SerializeField] private SpawnComponent _jumpParticles;
+        [SerializeField] private SpawnComponent _slamDownParticles;
         [SerializeField] private ParticleSystem _hitParticles;
 
         private Collider2D[] _interactionResult = new Collider2D[1];
@@ -30,7 +42,10 @@ namespace Scripts
         private static readonly int IsRunningkey = Animator.StringToHash("is-running");
         private static readonly int VetricalVelocityKey = Animator.StringToHash("vertical-velocity");
         private static readonly int HitKey = Animator.StringToHash("hit-trigger");
+        private static readonly int AttackKey = Animator.StringToHash("attack");
 
+
+        private bool _isArmed;
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -86,10 +101,12 @@ namespace Scripts
             if(_isGrounded)
             {
                 yVelocity += _jumpSpeed;
+                _jumpParticles.Spawn();
             }
             else if(_allowDoubleJump)
             {
                 yVelocity = _jumpSpeed;
+                _jumpParticles.Spawn();
                 _allowDoubleJump = false;
             }
             return yVelocity;
@@ -163,10 +180,44 @@ namespace Scripts
                 }
             }
         }
-
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.IsInLayer(_groundLayer))
+            {
+                var contact = other.contacts[0];
+                if(contact.relativeVelocity.y >= _slamDownVelocity)
+                {
+                    _slamDownParticles.Spawn();
+                }
+            }
+        }
         public void SpawnFootDust()
         {
             _footStepParticles.Spawn();
+        }
+
+        public void Attack()
+        {
+            if (!_isArmed) return;
+            _animator.SetTrigger(AttackKey);
+        }
+        private void OnAttak()
+        {
+            var gos = _attackRange.GetObjectInRange();
+            foreach (var go in gos)
+            {
+                var hp = go.GetComponent<HealthComponent>();
+                if (hp != null && go.CompareTag("Enemy"))
+                {
+                    hp.ModifyHealth(-_damage);
+                }
+            }
+        }
+
+        public void ArmHero()
+        {
+            _isArmed = true;
+            _animator.runtimeAnimatorController = _armed;
         }
     }
 
