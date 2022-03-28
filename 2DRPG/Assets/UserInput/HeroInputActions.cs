@@ -53,15 +53,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Attack1"",
-                    ""type"": ""Button"",
-                    ""id"": ""8417ddc5-bc99-428b-bc02-eb2adb4ed928"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -141,17 +132,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f0cacbed-3d48-4fc6-877f-c48c139864a1"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -163,7 +143,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         m_Hero_SaySomething = m_Hero.FindAction("SaySomething", throwIfNotFound: true);
         m_Hero_Movement = m_Hero.FindAction("Movement", throwIfNotFound: true);
         m_Hero_Interact = m_Hero.FindAction("Interact", throwIfNotFound: true);
-        m_Hero_Attack1 = m_Hero.FindAction("Attack1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -226,7 +205,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Hero_SaySomething;
     private readonly InputAction m_Hero_Movement;
     private readonly InputAction m_Hero_Interact;
-    private readonly InputAction m_Hero_Attack1;
     public struct HeroActions
     {
         private @HeroInputActions m_Wrapper;
@@ -234,7 +212,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         public InputAction @SaySomething => m_Wrapper.m_Hero_SaySomething;
         public InputAction @Movement => m_Wrapper.m_Hero_Movement;
         public InputAction @Interact => m_Wrapper.m_Hero_Interact;
-        public InputAction @Attack1 => m_Wrapper.m_Hero_Attack1;
         public InputActionMap Get() { return m_Wrapper.m_Hero; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -253,9 +230,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnInteract;
-                @Attack1.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnAttack1;
-                @Attack1.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnAttack1;
-                @Attack1.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnAttack1;
             }
             m_Wrapper.m_HeroActionsCallbackInterface = instance;
             if (instance != null)
@@ -269,9 +243,6 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @Attack1.started += instance.OnAttack1;
-                @Attack1.performed += instance.OnAttack1;
-                @Attack1.canceled += instance.OnAttack1;
             }
         }
     }
@@ -281,6 +252,5 @@ public partial class @HeroInputActions : IInputActionCollection2, IDisposable
         void OnSaySomething(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnAttack1(InputAction.CallbackContext context);
     }
 }

@@ -44,14 +44,6 @@ namespace Scripts
                 _hero.Interact();
             }
         }
-        public void OnAttack(InputAction.CallbackContext context)
-        {
-            if (context.canceled)
-            {
-                _hero.Attack();
-            }
-        }
-
     }
 
 }
