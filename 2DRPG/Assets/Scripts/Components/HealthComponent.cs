@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 namespace Scripts.Components
 {
@@ -9,12 +10,16 @@ namespace Scripts.Components
         [SerializeField] private UnityEvent _onDamage;
         [SerializeField] private UnityEvent _onHeal;
         [SerializeField] private UnityEvent _onDie;
+        [SerializeField] private HealthChangeEvent _onChange;
 
         public void ModifyHealth(int healthDelta)
         {
             _health += healthDelta;
 
-            if(healthDelta < 0)
+            _onChange?.Invoke(_health);
+
+
+            if (healthDelta < 0)
             {
                 _onDamage?.Invoke();
             }
@@ -27,6 +32,16 @@ namespace Scripts.Components
             {
                 _onDie?.Invoke();
             }
+        }
+        [Serializable]
+        public class HealthChangeEvent : UnityEvent<int>
+        {
+
+        }
+
+        public void SetHealth(int health)
+        {
+            _health = health;
         }
     }
 

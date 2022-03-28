@@ -1,4 +1,5 @@
 using Scripts.Components;
+using Scripts.Model;
 using Scripts.Utils;
 using UnityEngine;
 
@@ -15,7 +16,6 @@ namespace Scripts
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private float _interactionRadius;
         [SerializeField] private LayerMask _interactionLayer;
-        [SerializeField] private int _coins;
 
         [SerializeField] private LayerCheck _groundCheck;
 
@@ -44,14 +44,25 @@ namespace Scripts
         private static readonly int HitKey = Animator.StringToHash("hit-trigger");
         private static readonly int AttackKey = Animator.StringToHash("attack");
 
+        private GameSession _session;
 
-        private bool _isArmed;
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
         }
 
+        public void OnHealthChanged(int currentHealth)
+        {
+            _session.Data.Hp = currentHealth;
+        }
+        private void Start()
+        {
+            _session = FindObjectOfType<GameSession>();
+            var health = GetComponent<HealthComponent>();
+            health.SetHealth(_session.Data.Hp);
+            UpdateHeroWeapon();
+        }
         private void Update()
         {
             _isGrounded = IsGrounded();
@@ -140,20 +151,20 @@ namespace Scripts
             _animator.SetTrigger(HitKey);
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _damageJumpSpeed);
 
-            if(_coins > 0)
+            if(_session.Data.Coins > 0)
             SpawnCoins();
         }
 
         public void AddCoins(int coins)
         {
-            _coins += coins;
-            Debug.Log($"{coins} coins added. total coins: {_coins}");
+            _session.Data.Coins += coins;
+            Debug.Log($"{coins} coins added. total coins: {_session.Data.Coins}");
         }
         private void SpawnCoins()
         {
-            var numCoinsDispose = Mathf.Min(_coins, 5);
-            _coins -= numCoinsDispose;
-            Debug.Log($"total coins: {_coins}");
+            var numCoinsDispose = Mathf.Min(_session.Data.Coins, 5);
+            _session.Data.Coins -= numCoinsDispose;
+            Debug.Log($"total coins: {_session.Data.Coins}");
 
             var burst = _hitParticles.emission.GetBurst(0);
             burst.count = numCoinsDispose;
@@ -198,10 +209,10 @@ namespace Scripts
 
         public void Attack()
         {
-            if (!_isArmed) return;
+            if (!_session.Data.IsArmed) return;
             _animator.SetTrigger(AttackKey);
         }
-        private void OnAttak()
+        private void OnDoAttak()
         {
             var gos = _attackRange.GetObjectInRange();
             foreach (var go in gos)
@@ -216,8 +227,14 @@ namespace Scripts
 
         public void ArmHero()
         {
-            _isArmed = true;
+            _session.Data.IsArmed = true;
+            UpdateHeroWeapon();
             _animator.runtimeAnimatorController = _armed;
+        }
+
+        private void UpdateHeroWeapon()
+        {
+            _animator.runtimeAnimatorController = _session.Data.IsArmed ? _armed : _disarmed;
         }
     }
 

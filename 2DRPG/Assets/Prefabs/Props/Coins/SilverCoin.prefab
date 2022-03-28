@@ -103,7 +103,7 @@ MonoBehaviour:
   _action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4423270338851418011, guid: 3e3be8adf6bb2a543af5100db9e073c1, type: 3}
         m_TargetAssemblyTypeName: Scripts.Hero, Assembly-CSharp
         m_MethodName: AddCoins
         m_Mode: 3
