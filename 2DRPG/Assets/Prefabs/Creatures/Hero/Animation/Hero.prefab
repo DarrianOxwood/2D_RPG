@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3556653059061856635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7739230750103431600}
+  - component: {fileID: 84902499012131040}
+  - component: {fileID: 3401871230853730275}
+  m_Layer: 0
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7739230750103431600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3556653059061856635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4423270338851418020}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &84902499012131040
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3556653059061856635}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
+--- !u!114 &3401871230853730275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3556653059061856635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0929ca69e28ea41a95565814e9993a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layer:
+    serializedVersion: 2
+    m_Bits: 64
+  _isTouchinglayer: 0
 --- !u!1 &4423270338851418022
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,7 +81,7 @@ GameObject:
   - component: {fileID: 4423270338851418015}
   - component: {fileID: 4423270338851418014}
   - component: {fileID: 4423270338851418013}
-  - component: {fileID: 163205740029981171}
+  - component: {fileID: 8092020547455574642}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -33,15 +97,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4423270338851418022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3140557, y: -1.556, z: 0}
+  m_LocalPosition: {x: -5.5640554, y: -1.634, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4423270338904544372}
   - {fileID: 4423270340314958131}
   - {fileID: 4423270339228655742}
   - {fileID: 4423270340003379209}
   - {fileID: 4423270338972237192}
   - {fileID: 4423270339135474285}
+  - {fileID: 4423270338904544372}
+  - {fileID: 7739230750103431600}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -123,23 +188,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 6
   _jumpSpeed: 10
-  _damageJumpSpeed: 50
-  _slamDownVelocity: 5
+  _damageVelocity: 5
   _damage: 1
   _groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  _interactionRadius: 1
+  _groundCheck: {fileID: 4423270338904544374}
+  _attackRange: {fileID: 4423270339135474284}
+  _particles: {fileID: 8092020547455574642}
   _interactionLayer:
     serializedVersion: 2
     m_Bits: 256
-  _groundCheck: {fileID: 4423270338904544374}
+  _wallCheck: {fileID: 3401871230853730275}
+  _slamDownVelocity: 5
+  _interactionRadius: 1
   _armed: {fileID: 9100000, guid: b5bfd02cf3cbed645bc6cbc33fc46fbc, type: 2}
   _disarmed: {fileID: 9100000, guid: 49490862116d81642b91d2b5faa50b23, type: 2}
-  _attackRange: {fileID: 4423270339135474284}
-  _footStepParticles: {fileID: 4423270340314958130}
-  _jumpParticles: {fileID: 4423270340003379208}
-  _slamDownParticles: {fileID: 4423270338972237199}
   _hitParticles: {fileID: 4423270339228655743}
 --- !u!50 &4423270338851418008
 Rigidbody2D:
@@ -231,7 +295,7 @@ MonoBehaviour:
   _onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 163205740029981171}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Scripts.Components.ReloadLevelComponent, Assembly-CSharp
         m_MethodName: Reload
         m_Mode: 1
@@ -245,19 +309,7 @@ MonoBehaviour:
         m_CallState: 2
   _onChange:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4423270338851418011}
-        m_TargetAssemblyTypeName: Scripts.Hero, Assembly-CSharp
-        m_MethodName: OnHealthChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4423270338851418013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +404,7 @@ MonoBehaviour:
   m_DefaultActionMap: Hero
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &163205740029981171
+--- !u!114 &8092020547455574642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,9 +413,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4423270338851418022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac97adecdedc7674b9f3db92920ab5ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 20a6bda386e4b57448a18aae5d147681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawners:
+  - Id: Run
+    Component: {fileID: 4423270340314958130}
+  - Id: Jump
+    Component: {fileID: 4423270340003379208}
+  - Id: SlamDown
+    Component: {fileID: 4423270338972237199}
 --- !u!1 &4423270338904544375
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,11 +449,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4423270338904544375}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.041, z: 0}
+  m_LocalPosition: {x: 0, y: 0.007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4423270338851418020}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4423270338904544373
 CircleCollider2D:
@@ -411,7 +470,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.023556232, y: -0.17825818}
   serializedVersion: 2
-  m_Radius: 0.21450448
+  m_Radius: 0.3
 --- !u!114 &4423270338904544374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,10 +483,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0929ca69e28ea41a95565814e9993a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundLayer:
+  _layer:
     serializedVersion: 2
     m_Bits: 128
-  IsTouchingLayer: 0
+  _isTouchinglayer: 0
 --- !u!1 &4423270338972237193
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +516,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4423270338851418020}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4423270338972237199
 MonoBehaviour:
@@ -502,7 +561,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4423270338851418020}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4423270339135474284
 MonoBehaviour:
@@ -547,7 +606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4423270338851418020}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &4423270339228655743
 ParticleSystem:
@@ -5408,7 +5467,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4423270338851418020}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4423270340003379208
 MonoBehaviour:
@@ -5453,7 +5512,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4423270338851418020}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4423270340314958130
 MonoBehaviour:

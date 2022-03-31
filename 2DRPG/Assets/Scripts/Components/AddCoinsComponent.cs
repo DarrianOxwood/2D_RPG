@@ -1,3 +1,4 @@
+using Scripts.Creatures;
 using UnityEngine;
 
 namespace Scripts.Components
